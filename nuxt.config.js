@@ -90,6 +90,6 @@ export default {
   build: {},
 
   generate: {
-    dir: '/Users/spjy/git/aeroponics-ui/testingdist'
+    dir: '/var/www/html/',
   },
 }
