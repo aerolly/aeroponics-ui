@@ -40,7 +40,6 @@ export default {
     host: '0.0.0.0',
   },
 
-  buildDir: '/var/www/html',
   /*
    ** Plugins to load before mounting the App
    ** https://nuxtjs.org/guide/plugins
@@ -89,4 +88,8 @@ export default {
    ** See https://nuxtjs.org/api/configuration-build/
    */
   build: {},
+
+  generate: {
+    dir: '/Users/spjy/git/aeroponics-ui/testingdist'
+  },
 }
