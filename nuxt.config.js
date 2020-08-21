@@ -8,7 +8,7 @@ export default {
    ** Nuxt target
    ** See https://nuxtjs.org/api/configuration-target
    */
-  target: 'server',
+  target: 'target',
   /*
    ** Headers of the page
    ** See https://nuxtjs.org/api/configuration-head
@@ -39,6 +39,8 @@ export default {
     port: 80,
     host: '0.0.0.0',
   },
+
+  buildDir: '/var/www/html',
   /*
    ** Plugins to load before mounting the App
    ** https://nuxtjs.org/guide/plugins
