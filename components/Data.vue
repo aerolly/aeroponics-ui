@@ -5,7 +5,7 @@
         <span v-if="value"> {{ value }}{{ unit }} </span>
         <span v-else>-</span>
       </h2>
-      <div class="percent-difference">+2.36%</div>
+      <div class="percent-difference"></div>
     </div>
     <p class="-mt-5">{{ dataType }}</p>
     <div></div>
