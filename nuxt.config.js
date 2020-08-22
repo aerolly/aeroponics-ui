@@ -35,16 +35,11 @@ export default {
     API_URL: process.env.API_URL,
   },
 
-  server: {
-    port: 80,
-    host: '0.0.0.0',
-  },
-
   /*
    ** Plugins to load before mounting the App
    ** https://nuxtjs.org/guide/plugins
    */
-  plugins: ['~/plugins/axios.js'],
+  plugins: ['~/plugins/axios.js', '~/plugins/touch.js'],
   /*
    ** Auto import components
    ** See https://nuxtjs.org/api/configuration-components

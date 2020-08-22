@@ -1,13 +1,13 @@
 <template>
   <span>
-    <span v-if="!edit" id="edit" @click="handleEdit">
+    <vue-touch v-if="!edit" id="edit" @click="handleEdit" @tap="handleEdit">
       {{ value }}
-    </span>
+    </vue-touch>
     <span v-if="edit">
       <input
         ref="inputEl"
         v-model="input"
-        type="text"
+        type="number"
         @keyup.enter="handleSubmit"
       />
       <span title="Confirm" @click="handleSubmit">
@@ -74,7 +74,7 @@ export default Vue.extend({
   },
   data() {
     return {
-      input: 10,
+      input: '',
       edit: false,
     }
   },
@@ -116,5 +116,11 @@ export default Vue.extend({
 
 .card:hover {
   top: -2px;
+}
+
+input {
+  background-color: #393e46;
+  white-space: nowrap;
+  width: 50px;
 }
 </style>

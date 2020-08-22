@@ -71,10 +71,4 @@ select {
   background-color: #393e46;
   margin-left: -4px;
 }
-
-input {
-  background-color: #393e46;
-  white-space: nowrap;
-  width: 30px;
-}
 </style>

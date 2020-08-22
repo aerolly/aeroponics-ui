@@ -59,12 +59,6 @@ select {
   margin-left: -4px;
 }
 
-input {
-  background-color: #393e46;
-  white-space: nowrap;
-  width: 30px;
-}
-
 .percent-difference {
   @apply pl-3;
   @apply text-lg;
