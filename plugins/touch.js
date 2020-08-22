@@ -1,4 +1,4 @@
 import Vue from 'vue'
-import VueTouch from 'vue-touch'
+import Vue2TouchEvents from 'vue2-touch-events'
 
-Vue.use(VueTouch)
+Vue.use(Vue2TouchEvents)

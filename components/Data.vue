@@ -2,7 +2,7 @@
   <Card>
     <div class="flex flex-row">
       <h2 class="text-5xl font-bold">
-        <span v-if="value"> {{ value.toFixed(2) }}{{ unit }} </span>
+        <span v-if="value"> {{ value }}{{ unit }} </span>
         <span v-else>-</span>
       </h2>
       <div class="percent-difference"></div>
@@ -37,7 +37,9 @@ export default Vue.extend({
   },
   computed: {
     value() {
-      return this.$store.state.system[this.dataKey]
+      return typeof this.$store.state.system[this.dataKey] === 'number'
+        ? this.$store.state.system[this.dataKey].toFixed(2)
+        : this.$store.state.system[this.dataKey]
     },
   },
 })

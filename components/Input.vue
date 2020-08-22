@@ -1,8 +1,8 @@
 <template>
   <span>
-    <vue-touch v-if="!edit" id="edit" @click="handleEdit" @tap="handleEdit">
+    <span v-if="!edit" id="edit" @click="handleEdit" @v-touch:tap="handleEdit">
       {{ value }}
-    </vue-touch>
+    </span>
     <span v-if="edit">
       <input
         ref="inputEl"
