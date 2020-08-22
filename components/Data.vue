@@ -2,12 +2,53 @@
   <Card>
     <div class="flex flex-row">
       <h2 class="text-5xl font-bold">
-        <span v-if="value"> {{ value }}{{ unit }} </span>
+        <span v-if="value && typeof value === 'number'">
+          {{ value.toFixed(2) }}{{ unit }}
+        </span>
         <span v-else>-</span>
       </h2>
-      <!-- <div class="percent-difference"></div> -->
+      <div
+        :class="`percent-difference font-bold ${
+          percentDifference >= 0 ? 'text-green-500' : 'text-red-500'
+        }`"
+      >
+        <span v-if="percentDifference >= 0">
+          <svg
+            id="Arrow_long_up"
+            class="w-5 inline"
+            version="1.1"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            x="0px"
+            y="0px"
+            viewBox="0 0 20 20"
+            enable-background="new 0 0 20 20"
+            xml:space="preserve"
+          >
+            <path fill="#81efb4" d="M10,0.75L15.5,6H12v13H8V6H4.5L10,0.75z" />
+          </svg>
+        </span>
+        <span v-else>
+          <svg
+            id="Arrow_long_down"
+            class="w-5 inline"
+            version="1.1"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            x="0px"
+            y="0px"
+            viewBox="0 0 20 20"
+            enable-background="new 0 0 20 20"
+            xml:space="preserve"
+          >
+            <path fill="#f56565" d="M10,19.25L4.5,14H8V1h4v13h3.5L10,19.25z" />
+          </svg>
+        </span>
+        {{ Math.abs(percentDifference).toFixed(2) }}
+        %
+      </div>
     </div>
-    <p class="-mt-2">{{ dataType }}</p>
+    <p class="-mt-5">{{ dataType }}</p>
     <br />
     <div>
       <apexchart ref="chart" :options="options" :series="series"></apexchart>
@@ -40,6 +81,8 @@ export default Vue.extend({
   },
   data() {
     return {
+      previousValue: 0,
+      percentDifference: 0,
       options: {
         chart: {
           id: 'vuechart-example',
@@ -89,18 +132,12 @@ export default Vue.extend({
   },
   computed: {
     value() {
-      return typeof this.$store.state.system[this.dataKey] === 'number'
-        ? this.$store.state.system[this.dataKey].toFixed(2)
-        : this.$store.state.system[this.dataKey]
+      return this.$store.state.system[this.dataKey]
     },
   },
   watch: {
     value(v) {
-      console.log(this.series)
-      if (
-        this.series &&
-        typeof this.$store.state.system[this.dataKey] === 'number'
-      ) {
+      if (typeof this.$store.state.system[this.dataKey] === 'number') {
         this.options.xaxis.categories.push(new Date(Date.now()).toISOString())
         this.series[0].data.push(v)
 
@@ -118,6 +155,15 @@ export default Vue.extend({
             categories: this.options.xaxis.categories,
           },
         })
+
+        if (v !== this.previousValue) {
+          this.percentDifference =
+            ((v - this.previousValue) / ((v + this.previousValue) / 2)) * 100
+        } else {
+          this.percentDifference = 0
+        }
+
+        this.previousValue = v
       }
     },
   },
@@ -144,6 +190,5 @@ select {
   @apply pl-3;
   @apply text-lg;
   line-height: 5;
-  color: #81efb4;
 }
 </style>
