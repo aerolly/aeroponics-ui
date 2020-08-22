@@ -2,7 +2,7 @@
   <Card>
     <div class="flex flex-row">
       <h2 class="text-5xl font-bold">
-        <span v-if="value"> {{ value }}{{ unit }} </span>
+        <span v-if="value"> {{ value.toFixed(2) }}{{ unit }} </span>
         <span v-else>-</span>
       </h2>
       <div class="percent-difference"></div>
