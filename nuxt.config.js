@@ -39,7 +39,11 @@ export default {
    ** Plugins to load before mounting the App
    ** https://nuxtjs.org/guide/plugins
    */
-  plugins: ['~/plugins/axios.js', { src: '~/plugins/touch.js', ssr: false }],
+  plugins: [
+    '~/plugins/axios.js',
+    { src: '~/plugins/touch.js', ssr: false },
+    '~/plugins/charts.js',
+  ],
   /*
    ** Auto import components
    ** See https://nuxtjs.org/api/configuration-components
