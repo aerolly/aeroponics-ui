@@ -105,6 +105,9 @@ export default Vue.extend({
         stroke: {
           curve: 'stepline',
         },
+        markers: {
+          size: 5,
+        },
         xaxis: {
           categories: [],
         },
@@ -117,9 +120,6 @@ export default Vue.extend({
             shadeTo: 'light',
             shadeIntensity: 0.65,
           },
-        },
-        dataLabels: {
-          enabled: true,
         },
       },
       series: [
@@ -139,7 +139,7 @@ export default Vue.extend({
     value(v) {
       if (typeof this.$store.state.system[this.dataKey] === 'number') {
         this.options.xaxis.categories.push(new Date(Date.now()).toISOString())
-        this.series[0].data.push(v)
+        this.series[0].data.push(v.toFixed(2))
 
         this.$refs.chart.updateSeries(
           [
