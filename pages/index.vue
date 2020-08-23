@@ -3,8 +3,21 @@
     <div class="w-full md:w-1/2 lg:w-1/2 xl:w-1/4 p-2">
       <System />
     </div>
-    <div class="w-full md:w-1/2 lg:w-1/2 xl:w-3/4 p-2">
-      <Data data-key="temperature" data-type="Temperature" unit="˚F" />
+    <div
+      class="flex flex-col lg:flex-row w-full md:w-1/2 lg:w-1/2 xl:w-3/4 p-2"
+    >
+      <Data
+        class="xl:w-1/2 mb-4 xl:mr-4"
+        data-key="temperature"
+        data-type="Temperature"
+        unit="˚F"
+      />
+      <Data
+        class="xl:w-1/2 mb-4"
+        data-key="pressure"
+        data-type="Pressure"
+        unit=" PSI"
+      />
     </div>
   </div>
 </template>
@@ -31,7 +44,10 @@ export default Vue.extend({
     /* Listen for events: */
     this.socket.on('data', (msg, cb) => {
       console.log(msg)
-      this.$store.commit('system/update', { key: msg.key, result: msg.result })
+      this.$store.commit('system/update', {
+        key: msg.key,
+        result: msg.result,
+      })
     })
   },
 })
