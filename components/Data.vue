@@ -1,5 +1,6 @@
 <template>
   <Card>
+    <p class="secondary text-sm font-bold">{{ dataType }} [{{ lastData }}]</p>
     <div class="flex flex-row">
       <h2 class="text-5xl font-bold">
         <span v-if="value && typeof value === 'number'">
@@ -48,7 +49,7 @@
         %
       </div>
     </div>
-    <p class="-mt-5">{{ dataType }}</p>
+    <p class="text-xs text-gray-200 -mt-5"></p>
     <br />
     <div>
       <apexchart ref="chart" :options="options" :series="series"></apexchart>
@@ -58,6 +59,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
+import dayjs from 'dayjs'
 import Card from '../components/Card.vue'
 
 export default Vue.extend({
@@ -81,6 +83,7 @@ export default Vue.extend({
   },
   data() {
     return {
+      lastDate: '-',
       previousValue: 0,
       percentDifference: 0,
       options: {
@@ -134,11 +137,17 @@ export default Vue.extend({
     value() {
       return this.$store.state.system[this.dataKey]
     },
+    time() {
+      return this.$store.state.system.time
+    },
   },
   watch: {
     value(v) {
-      if (typeof this.$store.state.system[this.dataKey] === 'number') {
-        this.options.xaxis.categories.push(new Date(Date.now()).toISOString())
+      if (this.value && this.time && typeof this.value === 'number') {
+        const time = dayjs.unix(this.time).format('HH:mm:ss')
+
+        this.lastData = time
+        this.options.xaxis.categories.push(time)
         this.series[0].data.push(v.toFixed(2))
 
         this.$refs.chart.updateSeries(
@@ -190,5 +199,9 @@ select {
   @apply pl-3;
   @apply text-lg;
   line-height: 5;
+}
+
+.secondary {
+  color: #b7b7b7;
 }
 </style>

@@ -8,7 +8,8 @@ export const mutations = {
       Vue.set(state, k, values[k])
     })
   },
-  update(state, { key, result }) {
+  update(state, { key, result, time }) {
     Vue.set(state, key, result)
+    Vue.set(state, 'time', time)
   },
 }

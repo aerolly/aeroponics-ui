@@ -47,6 +47,7 @@ export default Vue.extend({
       this.$store.commit('system/update', {
         key: msg.key,
         result: msg.result,
+        time: msg.time,
       })
     })
   },
