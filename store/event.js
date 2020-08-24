@@ -1,12 +1,15 @@
 import Vue from 'vue'
 
-export const state = () => ({})
+export const state = () => ({
+  events: [],
+})
 
 export const mutations = {
-  initialize(state, values) {
-    Object.keys(values).forEach((k) => {
-      Vue.set(state, k, values[k])
-    })
+  add(state, values) {
+    if (state.events.length === 50) {
+      state.events.pop()
+    }
+    state.events.splice(0, 0, values)
   },
   update(state, { key, result, time, type }) {
     Vue.set(state, key, result)

@@ -1,19 +1,18 @@
 <template>
   <div class="flex flex-col md:flex-row">
-    <div class="w-full md:w-1/2 lg:w-1/2 xl:w-1/4 p-2">
+    <div class="flex flex-col w-full md:w-1/2 lg:w-1/2 xl:w-1/4">
       <System />
+      <Event />
     </div>
-    <div
-      class="flex flex-col lg:flex-row w-full md:w-1/2 lg:w-1/2 xl:w-3/4 p-2"
-    >
+    <div class="flex flex-col lg:flex-row w-full md:w-1/2 lg:w-1/2 xl:w-3/4">
       <Data
-        class="xl:w-1/2 mb-4 xl:mr-4"
+        class="xl:w-1/2"
         data-key="temperature"
         data-type="Temperature"
         unit="˚F"
       />
       <Data
-        class="xl:w-1/2 mb-4"
+        class="xl:w-1/2"
         data-key="pressure"
         data-type="Pressure"
         unit=" PSI"
@@ -24,12 +23,16 @@
 
 <script lang="ts">
 import Vue from 'vue'
+import dayjs from 'dayjs'
+
 import System from '../components/System.vue'
+import Event from '../components/Event.vue'
 import Data from '../components/Data.vue'
 
 export default Vue.extend({
   components: {
     System,
+    Event,
     Data,
   },
   mounted() {
@@ -46,8 +49,16 @@ export default Vue.extend({
       console.log(msg)
       this.$store.commit('system/update', {
         key: msg.key,
+        type: msg.type,
         result: msg.result,
         time: msg.time,
+      })
+
+      this.$store.commit('event/add', {
+        key: msg.key,
+        type: msg.type,
+        result: msg.type === 'sensor' ? msg.result.toFixed(2) : msg.result,
+        time: dayjs.unix(msg.time).format('HH:mm:ss'),
       })
     })
   },
