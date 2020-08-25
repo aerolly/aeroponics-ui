@@ -59,7 +59,6 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import dayjs from 'dayjs'
 import Card from '../components/Card.vue'
 
 export default Vue.extend({
@@ -144,10 +143,8 @@ export default Vue.extend({
   watch: {
     value(v) {
       if (this.value && this.time && typeof this.value === 'number') {
-        const time = dayjs.unix(this.time).format('HH:mm:ss')
-
-        this.lastData = time
-        this.options.xaxis.categories.push(time)
+        this.lastData = this.time
+        this.options.xaxis.categories.push(this.time)
         this.series[0].data.push(v.toFixed(2))
 
         this.$refs.chart.updateSeries(

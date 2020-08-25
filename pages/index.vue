@@ -51,14 +51,14 @@ export default Vue.extend({
         key: msg.key,
         type: msg.type,
         result: msg.result,
-        time: msg.time,
+        time: dayjs.unix(msg.time).utc().format('HH:mm:ss'),
       })
 
       this.$store.commit('event/add', {
         key: msg.key,
         type: msg.type,
         result: msg.type === 'sensor' ? msg.result.toFixed(2) : msg.result,
-        time: dayjs.unix(msg.time).format('HH:mm:ss'),
+        time: dayjs.unix(msg.time).utc().format('HH:mm:ss'),
       })
     })
   },

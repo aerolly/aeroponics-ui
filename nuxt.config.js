@@ -43,6 +43,7 @@ export default {
     '~/plugins/axios.js',
     { src: '~/plugins/touch.js', ssr: false },
     '~/plugins/charts.js',
+    '~plugins/dayjsUTC.js',
   ],
   /*
    ** Auto import components
