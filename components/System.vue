@@ -4,6 +4,12 @@
     <div>
       <table>
         <tr>
+          <td>Auto Mode</td>
+          <td>
+            <Select data-key="autoMode" type="system" />
+          </td>
+        </tr>
+        <tr>
           <td>Pump</td>
           <td>
             <Select data-key="system-pump" />
@@ -35,7 +41,7 @@
         </tr>
         <tr>
           <td>Forecast</td>
-          <td>70% chaince of rain after 15:00.</td>
+          <td>-</td>
         </tr>
       </table>
     </div>

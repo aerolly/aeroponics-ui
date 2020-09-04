@@ -29,6 +29,10 @@ export default Vue.extend({
       type: String,
       required: true,
     },
+    type: {
+      type: String,
+      default: 'command',
+    },
   },
   data() {
     return {
@@ -43,16 +47,24 @@ export default Vue.extend({
   },
   methods: {
     handleSelect() {
-      this.$api
-        .post('/command', {
-          command: 'controller',
-          options: {
-            key: this.dataKey,
-            action: Number(this.select),
-          },
+      if (this.type === 'command') {
+        this.$api
+          .post('/command', {
+            command: 'controller',
+            options: {
+              key: this.dataKey,
+              action: Number(this.select),
+            },
+          })
+          .then((d) => console.log(d))
+          .catch((d) => console.log(d))
+      } else if (this.type === 'system') {
+        this.$api.post('/system', {
+          key: this.dataKey,
+          value: this.select,
         })
-        .then((d) => console.log(d))
-        .catch((d) => console.log(d))
+      }
+
       this.value = this.select
       this.select = ''
     },
