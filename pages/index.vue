@@ -39,14 +39,12 @@ export default Vue.extend({
     this.$api
       .get('/system')
       .then(({ data }) => this.$store.commit('system/initialize', data))
-      .catch((r) => console.log(r))
 
     this.socket = this.$nuxtSocket({
       channel: '/',
     })
     /* Listen for events: */
     this.socket.on('data', (msg, cb) => {
-      console.log(msg)
       this.$store.commit('system/update', {
         key: msg.key,
         type: msg.type,

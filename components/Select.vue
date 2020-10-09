@@ -48,16 +48,13 @@ export default Vue.extend({
   methods: {
     handleSelect() {
       if (this.type === 'command') {
-        this.$api
-          .post('/command', {
-            command: 'controller',
-            options: {
-              key: this.dataKey,
-              action: Number(this.select),
-            },
-          })
-          .then((d) => console.log(d))
-          .catch((d) => console.log(d))
+        this.$api.post('/command', {
+          command: 'controller',
+          options: {
+            key: this.dataKey,
+            action: Number(this.select),
+          },
+        })
       } else if (this.type === 'system') {
         this.$api.post('/system', {
           key: this.dataKey,
