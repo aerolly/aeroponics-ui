@@ -1,6 +1,6 @@
 <template>
   <Card>
-    <h2 class="text-5xl font-bold pb-2">System</h2>
+    <h2 class="text-5xl font-bold pb-2">Genesis</h2>
     <div>
       <table>
         <tr>
@@ -9,22 +9,12 @@
             <Select data-key="autoMode" type="system" />
           </td>
         </tr>
-        <tr>
-          <td>Pump</td>
+        <tr v-for="controller in controllers" :key="controller.CurrentDeviceID">
+          <td>{{ controller.ModuleName }}-{{ controller.DeviceTypeName }}</td>
           <td>
-            <Select data-key="system-pump" />
-          </td>
-        </tr>
-        <tr>
-          <td>Lower Solenoid</td>
-          <td>
-            <Select data-key="lowerBed-solenoid" />
-          </td>
-        </tr>
-        <tr>
-          <td>Upper Solenoid</td>
-          <td>
-            <Select data-key="upperBed-solenoid" />
+            <Select
+              :data-key="`${controller.NodeName}-${controller.ModuleName}-${controller.DeviceTypeName}`"
+            />
           </td>
         </tr>
         <tr>
@@ -58,6 +48,16 @@ export default Vue.extend({
   components: {
     Card,
     Select,
+  },
+  data() {
+    return {
+      controllers: [],
+    }
+  },
+  mounted() {
+    this.$api.get('/controller').then(({ data }) => {
+      this.controllers = JSON.parse(data)
+    })
   },
 })
 </script>

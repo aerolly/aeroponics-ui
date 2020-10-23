@@ -7,13 +7,13 @@
     <div class="flex flex-col lg:flex-row w-full md:w-1/2 lg:w-1/2 xl:w-3/4">
       <Data
         class="xl:w-1/2"
-        data-key="temperature"
+        data-key="genesis-lowerBed-temperature"
         data-type="Temperature"
         unit="˚F"
       />
       <Data
         class="xl:w-1/2"
-        data-key="pressure"
+        data-key="genesis-system-pressure"
         data-type="Pressure"
         unit=" PSI"
       />
