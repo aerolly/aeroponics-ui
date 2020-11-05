@@ -7,15 +7,21 @@
     <div class="flex flex-col lg:flex-row w-full md:w-1/2 lg:w-1/2 xl:w-3/4">
       <Data
         class="xl:w-1/2"
-        data-key="temperature"
+        data-key="genesis-lowerBed-sht20Temperature"
         data-type="Temperature"
         unit="˚F"
       />
       <Data
         class="xl:w-1/2"
-        data-key="pressure"
+        data-key="genesis-system-pressure"
         data-type="Pressure"
         unit=" PSI"
+      />
+      <Data
+        class="xl:w-1/2"
+        data-key="genesis-lowerBed-sht20Humidity"
+        data-type="Humidity"
+        unit=" %"
       />
     </div>
   </div>
@@ -39,14 +45,12 @@ export default Vue.extend({
     this.$api
       .get('/system')
       .then(({ data }) => this.$store.commit('system/initialize', data))
-      .catch((r) => console.log(r))
 
     this.socket = this.$nuxtSocket({
       channel: '/',
     })
     /* Listen for events: */
     this.socket.on('data', (msg, cb) => {
-      console.log(msg)
       this.$store.commit('system/update', {
         key: msg.key,
         type: msg.type,
